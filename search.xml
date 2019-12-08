@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>[Redis]-Docker部署单机环境</title>
+      <link href="/2019/11/23/Redis-Docker%E9%83%A8%E7%BD%B2%E5%8D%95%E6%9C%BA%E7%8E%AF%E5%A2%83/"/>
+      <url>/2019/11/23/Redis-Docker%E9%83%A8%E7%BD%B2%E5%8D%95%E6%9C%BA%E7%8E%AF%E5%A2%83/</url>
+      
+        <content type="html"><![CDATA[<p><img src="http://q26vtompn.bkt.clouddn.com/redis.png?attname=&e=1574481445&token=vM1iR_wQCAvV6yz5HIbKOg9N69IFsZ9ZQIHGLyVH:O4FUX0IW-CZYHpuq2SDB-PjjZjU" alt=""></p><h3>docker拉取镜像及映射运行</h3><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># 拉取Redis最新镜像</span>docker pull redis <span class="token comment" spellcheck="true"># 获取redis配置文件（外网连接记得改bind 127.0.0.1）</span><span class="token function">wget</span> http://download.redis.io/redis-stable/redis.conf<span class="token function">mkdir</span> -p /usr/local/docker<span class="token function">mv</span> redis.conf /user/local/docker<span class="token comment" spellcheck="true"># 映射端口/配置文件启动</span>docker run -p 6379:6379 --name alice-redis -v /usr/local/docker/redis.conf:/etc/redis/redis.conf -v /usr/local/docker/data:/data -d redis redis-server /etc/redis/redis.conf --appendonly <span class="token function">yes</span></code></pre><hr><h3>docker查看Redis镜像运行情况</h3>docker ps<br/>查看运行中的容器是否存在刚才的Redis镜像<p><img src="http://q26vtompn.bkt.clouddn.com/redis-docker.png?attname=&e=1574482661&token=vM1iR_wQCAvV6yz5HIbKOg9N69IFsZ9ZQIHGLyVH:G1vNA2LlbbCgl7zOWqXzrItbYRo" alt=""></p><p>docker logs 容器名称/容器ID<br/><br>查看容器启动日志</p><p><img src="http://q26vtompn.bkt.clouddn.com/redis-docker-log.png?attname=&e=1574482858&token=vM1iR_wQCAvV6yz5HIbKOg9N69IFsZ9ZQIHGLyVH:pPBKgVG1rYUUbGmuf75dMPErVmk" alt=""></p><hr><h3>修改Redis配置</h3>修改完redis.conf配置后重启容器<pre class=" language-bash"><code class="language-bash">docker restart 容器ID</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Redis </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Redis </tag>
+            
+            <tag> Docker </tag>
+            
+            <tag> shell </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Fiddler+模拟器抓包配置</title>
+      <link href="/2019/11/21/Fiddler-%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%8A%93%E5%8C%85%E9%85%8D%E7%BD%AE/"/>
+      <url>/2019/11/21/Fiddler-%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%8A%93%E5%8C%85%E9%85%8D%E7%BD%AE/</url>
+      
+        <content type="html"><![CDATA[<p><img src="http://q26vtompn.bkt.clouddn.com/gamersky_01origin_01_20187211810784.jpg?e=1574331951&token=vM1iR_wQCAvV6yz5HIbKOg9N69IFsZ9ZQIHGLyVH:u9uA8UZNEkT3osCMJDR0sGaEUb4" alt="T"></p><h3>Fiddler下载</h3><p>首先下载抓包的工具,<a href="http://q1bhql9j7.bkt.clouddn.com/FiddlerSetup_5.0.20194.41348.exe" target="_blank" rel="noopener">Fidder</a></p><h3>模拟器下载</h3><p>自己下，很多</p><h3>配置代理</h3><p>Fidder配置允许远程客端连接自己端口作为代理服务器进行接口捕获</p><p><img src="http://q26vtompn.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20191121194825.png?attname=&e=1574340612&token=vM1iR_wQCAvV6yz5HIbKOg9N69IFsZ9ZQIHGLyVH:1dQaX9I9gMXs3HVylCiTF3rg-7c" alt=""></p><p>模拟器修改Wifi的代理信息为本地IP加Fidder开启的监听端口8888(默认)</p><p><img src="http://q26vtompn.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20191121195319.png?attname=&e=1574340811&token=vM1iR_wQCAvV6yz5HIbKOg9N69IFsZ9ZQIHGLyVH:bO2_5ztU5VH8WQE_jmmbXqUAscI" alt=""></p><p>最后给模拟器安装Fidder信任证书即可，在模拟器打开浏览器输入(<a href="http://ipv4.fiddler:8888" target="_blank" rel="noopener">http://ipv4.fiddler:8888</a>)</p><p><img src="http://q26vtompn.bkt.clouddn.com/2.png?attname=&e=1574340963&token=vM1iR_wQCAvV6yz5HIbKOg9N69IFsZ9ZQIHGLyVH:_JUdpMtowvi8a4sb4GTnGDGEDM0" alt=""></p><h3>抓包</h3><p><img src="http://q26vtompn.bkt.clouddn.com/fidder.gif?attname=&e=1574341164&token=vM1iR_wQCAvV6yz5HIbKOg9N69IFsZ9ZQIHGLyVH:_1TxEe2Z66q8TtKpp4uZ2YmVfb4" alt=""></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 配置 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 工具 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Plan</title>
+      <link href="/2019/11/08/Plan/"/>
+      <url>/2019/11/08/Plan/</url>
+      
+        <content type="html"><![CDATA[<p><img src="http://q26vtompn.bkt.clouddn.com/gamersky_025origin_049_201992018729C.jpg?e=1573220351&token=vM1iR_wQCAvV6yz5HIbKOg9N69IFsZ9ZQIHGLyVH:WPd8o7O_uKtc93Rcp0vLfDmKbls" alt="Big Plan"></p><ul><li>2019/11/08 周五<br/><blockquote><p>我什么时候回四川?<br/><br>A.2020-02-17(周一)<br/><br>B.2020-03-16(周一)<br/><br>C.2020-04-06(周一)<br/><br>D.2021-03-21(周一)<br/><br><del>E.不回来了<br/></del></p></blockquote></li></ul><hr><pre><code>1.北京在住的房子到期后，得先搬到可以月租的房子里2.查询成都公积金、社保转入流程，电话咨询怎么办理，是否需要代缴3.成都的IT公司较多的地方租房短期三个月4.打包家里的东西在回成都前两天寄走（书、衣服、被子、鞋）、（猫砂盆、吉他、锅碗瓢盆）5.方便面办理登记手续、疫苗（淘宝），购买同程的票跟我一起起飞，货仓是否可以喂水喂食，对猫有没有影响；登记前打车到机场，提前问下带宠物怎么办理流程登机，有的飞机不支持托运宠物，买票的时候要注意。6.春节在家跟爸妈说一下自己的打算7.11月到离开的时间里得边工作边准备简历，大概有3个月左右的时间8.建设银行办理公积金联名卡、社保卡9.找到我的毕业证、户口本10.提前半个月提离职，办好离职手续</code></pre><hr><ul><li>2019/12/01 周日<br><blockquote><ul><li>办好公积金联名卡且询问四川转入流程<br/></li></ul></blockquote><ul><li>找到毕业证和户口本</li></ul></li></ul><hr><ul><li>2020/01/01 周三<br><blockquote><ul><li>技术复习且更新简历项目经验<br/></li></ul></blockquote><ul><li>找到方便搬家的地方，租3个月</li></ul></li></ul><hr><ul><li>2020/01/23 周四<br><blockquote><ul><li>双方家长有没有时间吃个饭<br/></li></ul></blockquote></li></ul><hr><ul><li>2020/02/01 周六<br><blockquote><ul><li>淘宝咨询猫咪登机疫苗服务并且查看三月航班支持托运的航班/宠物托运B计划<br/></li></ul></blockquote></li></ul><hr><ul><li>2020/03/01 周日<br><blockquote><ul><li>找个时间跟明哥吃饭/闲聊的时候提一下想离职，再跟涛哥说一下想离职、再跟阳哥说一下想离职、再跟岩姐说一下想离职<br/></li></ul></blockquote></li></ul><hr><ul><li>2020/03/05 周二<br><blockquote><ul><li>给方便面做疫苗注射、证件办理，购买机票<br/></li><li>如果上不了飞机，淘宝看下宠物托运</li><li>工作交接</li></ul></blockquote></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Plan </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Big </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Nice Tools</title>
+      <link href="/2019/11/08/Nice-Tools/"/>
+      <url>/2019/11/08/Nice-Tools/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>喜欢各种高效、轻巧的工具，持续收集中……</p></blockquote><p><img src="http://tva1.sinaimg.cn/large/007X8olVly1g8ql3aliw6j31hc0u04qq.jpg" alt="Tool"></p><h3>😳小图标库</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.iconfont.cn/home/index" target="_blank" rel="noopener">阿里矢量库</a>存在许多日常小图标可以直接下载使用，提供了不同色系、大小的选择，这个博客的标志大部分从那里拿出来用的~</p><hr><h3>😃小图床</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://pic.xiaojianjian.net/" target="_blank" rel="noopener">小贱贱图床</a>，白嫖版每天只能上传20张图片</p><hr><h3>🤓文件外链</h3><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=444356086&auto=1&height=66"></iframe><br/>&nbsp;&nbsp;&nbsp;&nbsp;文件外链大多是对象存储，云平台存放暴露链接，对流量进行收费~继续白嫖，喜欢用石墨文档发现它可以上传文件，并且程序员的F12发现了链接如下一首歌->，对于音乐来说网易可以直接外链如上<p><img src="http://tva1.sinaimg.cn/large/007X8olVly1g8qml44rhqj30ul0al0su.jpg" alt="x"></p><p>F12调试点击这个播放器，可以看到一个Url，这就是外链了，嘻嘻，白嫖博客流~<br><img src="http://tva1.sinaimg.cn/large/007X8olVly1g8qmp3k8qkj31h60m141g.jpg" alt="x"></p><hr><h3>😈大图床</h3><p><a href="https://portal.qiniu.com/" target="_blank" rel="noopener">七牛云</a>，每个月有免费用的量，如果担心可以设置个超额报警，图片、文件等等都可以直接生成外链的~</p><p><img src="http://q26vtompn.bkt.clouddn.com/2019-11-24-12-03-44.png" alt=""></p><hr><h3>☺️MarkdownPicPicker</h3><p>Github大佬地址<a href="https://github.com/kingname/MarkdownPicPicker" target="_blank" rel="noopener">MarkdownPicPicker</a>，先说用途，平时截图想上传到七牛云形成外链得先转为本地图片然后登陆七牛云找到自己的容器再复制外链较麻烦，这个是省去转为本地文件和上传这一操作的工具。</p><ul><li><p>选择环境下载程序，我用的windows解压后大概这样,config是后自己建的啊</p><ul><li>MarkdownPicPicker.exe是执行截图变为外链的程序啊</li><li>pic相当于py脚本把你复制区的截图获取转换为本地图片暂存的区域，再调响应图床上传接口返回外链<br><img src="http://q26vtompn.bkt.clouddn.com/2019-11-24-12-11-05.png" alt=""></li></ul></li><li><p>新建config,并在里面新建config.ini配置文件来制定使用哪种图床，这个默认是有个图床的（没试过），我用的七牛云，config.ini如下，记得去掉注释</p></li></ul><pre><code>[basic]picture_folder = picpicture_suffix = pngpicture_host = QiniuUploader[QiniuUploader]access_key = 七牛云的aksecret_key = 七牛云的skcontainer_name = 七牛云存储空间名# 七牛云分配的域名用来获取上传的图片,{}是来注入你的文件名，# 类似http://q0n3aed1.bkt.clouddn.com/2019-11-24-12-11-05.pngurl = http://q0n3aed1.bkt.clouddn.com/{}    </code></pre><ul><li><p>截图，点MarkdownPicPicker.exe执行，会返回markdown的图片语法(我用的是markdow，打不出来-_-)，如果想只返回url可以执行MarkdownPicPicker.exe –linkonly</p></li><li><p>需要注意图片也会在你本地pic存一份的，有强迫症的同学可以写个定时任务定时清除</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技巧 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 工具 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>init</title>
+      <link href="/2019/11/07/init/"/>
+      <url>/2019/11/07/init/</url>
+      
+        <content type="html"><![CDATA[<p><img src="http://tva1.sinaimg.cn/large/007X8olVly1g8pqivrzl2j31hc0u013x.jpg" alt="bg"></p><blockquote><p>我曾踏足山巅，也曾进入低谷，二者都让我受益良多。</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 感悟 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 目标 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
